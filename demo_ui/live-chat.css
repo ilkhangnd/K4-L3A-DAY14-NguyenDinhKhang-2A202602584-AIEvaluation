@@ -1,0 +1,9 @@
+.composer .find-button {
+  color: #087e7c;
+  background: var(--teal-soft);
+}
+
+.composer button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}

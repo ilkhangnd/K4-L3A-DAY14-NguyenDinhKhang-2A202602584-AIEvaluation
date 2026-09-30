@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="live-chat.css" />
   </head>
   <body>
     <main class="app-shell">
@@ -42,7 +43,12 @@
           <div class="section-heading"><div><p class="eyebrow">Try a saved test case</p><h2>Suggested questions</h2></div><button class="text-button" id="shuffle-button" type="button">Refresh ↻</button></div>
           <div class="suggestion-grid" id="suggestion-grid"></div>
         </section>
-        <form class="composer" id="composer"><span class="composer-icon">⌕</span><input id="question-input" autocomplete="off" placeholder="Search benchmark questions…" /><button type="submit">Find case</button></form>
+        <form class="composer" id="composer">
+          <span class="composer-icon">⌕</span>
+          <input id="question-input" autocomplete="off" placeholder="Ask OrbitTech Support or find a benchmark case…" />
+          <button class="find-button" type="submit" data-action="find">Find case</button>
+          <button type="submit" data-action="chat">Send</button>
+        </form>
       </section>
       <aside class="inspector" id="inspector">
         <div class="inspector-header"><div><p class="eyebrow">Evaluation trace</p><h2>Case signals</h2></div><span class="case-pill" id="case-pill">—</span></div>
