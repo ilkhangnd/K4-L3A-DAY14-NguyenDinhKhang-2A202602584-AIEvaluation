@@ -136,12 +136,12 @@ The generated log maps failures in dataset order: F001=M01, F002=M02, F003=M04, 
 
 | Failure ID | Type | Root Cause | Suggested Fix | Status |
 |------------|------|------------|---------------|--------|
-| F001 | off_topic | Answer does not address the question — improve prompt clarity | Review intent classification and add off-topic negatives to the routing test set. | Open |
-| F002 | off_topic | Context is missing or irrelevant — improve retrieval | Add claim-level grounding checks and require cited retrieved evidence before returning factual policy details. | Open |
-| F003 | off_topic | Answer does not address the question — improve prompt clarity | Inspect the actual answer, gold evidence, and retrieved chunks together for each failing trace before changing the pipeline. | Open |
-| F004 | hallucination | Context is missing or irrelevant — improve retrieval | Review trace | Open |
-| F005 | off_topic | Answer is missing key information — increase context window or improve generation | Review trace | Open |
-| F006 | off_topic | Context is missing or irrelevant — improve retrieval | Review trace | Open |
+| F001 | off_topic | Answer does not address the question — improve prompt clarity | Add intent-routing examples for this question type and verify the answer addresses the requested task before adding more context. | Open |
+| F002 | off_topic | Context is missing or irrelevant — improve retrieval | Review the answer against both gold and retrieved evidence, then remove unsupported details or align the allowed evidence boundary. | Open |
+| F003 | off_topic | Answer does not address the question — improve prompt clarity | Add intent-routing examples for this question type and verify the answer addresses the requested task before adding more context. | Open |
+| F004 | hallucination | Context is missing or irrelevant — improve retrieval | Require a retrieved policy or product source for every factual claim, and add a scope-routing rule when the question is outside the support domain. | Open |
+| F005 | off_topic | Answer is missing key information — increase context window or improve generation | Add a response checklist for the required conditions, authority limits, and next step; rerun this case with the same evidence trace. | Open |
+| F006 | off_topic | Context is missing or irrelevant — improve retrieval | Review the answer against both gold and retrieved evidence, then remove unsupported details or align the allowed evidence boundary. | Open |
 
 **Ba improvement suggestions ưu tiên**
 

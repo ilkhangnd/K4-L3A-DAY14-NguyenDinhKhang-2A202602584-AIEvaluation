@@ -798,45 +798,38 @@ class FailureAnalyzer:
         if not failures:
             return []
 
-        categories = self.categorize_failures(failures)
-        suggestions_by_type = {
-            "hallucination": (
-                "Add claim-level grounding checks and require cited retrieved evidence "
-                "before returning factual policy details."
-            ),
-            "irrelevant": (
-                "Add intent-routing examples and evaluate the prompt against the failed "
-                "question categories."
-            ),
-            "incomplete": (
-                "Retrieve complementary evidence chunks and add a response checklist for "
-                "required conditions and next steps."
-            ),
-            "off_topic": (
-                "Review intent classification and add off-topic negatives to the routing "
-                "test set."
-            ),
-            "refusal": (
-                "Review guardrail triggers and add safe in-scope examples that should not "
-                "be refused."
-            ),
-        }
-        suggestions = [
-            suggestions_by_type[failure_type]
-            for failure_type in categories
-            if failure_type in suggestions_by_type
-        ]
-        general_suggestions = [
-            "Inspect the actual answer, gold evidence, and retrieved chunks together for "
-            "each failing trace before changing the pipeline.",
-            "Add the representative failures to the golden dataset as regression cases "
-            "with explicit expected claims.",
-            "Re-run the benchmark after each change and compare answer-metric averages "
-            "against the baseline quality gate.",
-        ]
-        for suggestion in general_suggestions:
-            if len(suggestions) >= 3:
-                break
+        suggestions: list[str] = []
+        for failure in failures:
+            lowest_metric = min(
+                (
+                    ("faithfulness", failure.faithfulness),
+                    ("relevance", failure.relevance),
+                    ("completeness", failure.completeness),
+                ),
+                key=lambda item: item[1],
+            )[0]
+
+            if failure.failure_type == "hallucination":
+                suggestion = (
+                    "Require a retrieved policy or product source for every factual "
+                    "claim, and add a scope-routing rule when the question is outside "
+                    "the support domain."
+                )
+            elif lowest_metric == "completeness":
+                suggestion = (
+                    "Add a response checklist for the required conditions, authority "
+                    "limits, and next step; rerun this case with the same evidence trace."
+                )
+            elif lowest_metric == "relevance":
+                suggestion = (
+                    "Add intent-routing examples for this question type and verify the "
+                    "answer addresses the requested task before adding more context."
+                )
+            else:
+                suggestion = (
+                    "Review the answer against both gold and retrieved evidence, then "
+                    "remove unsupported details or align the allowed evidence boundary."
+                )
             suggestions.append(suggestion)
         return suggestions
 
