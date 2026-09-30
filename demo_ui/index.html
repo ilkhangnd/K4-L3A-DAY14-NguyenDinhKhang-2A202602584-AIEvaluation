@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OrbitTech Support Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#"><span class="brand-mark">O</span><span>OrbitTech<span class="brand-dot">.</span></span></a>
+        <div class="nav-label">Support workspace</div>
+        <button class="nav-item nav-item--active" type="button"><span class="nav-icon">✦</span>Assistant</button>
+        <button class="nav-item" type="button" id="metrics-nav"><span class="nav-icon">◔</span>Evaluation report</button>
+        <section class="sidebar-card">
+          <p class="eyebrow">Benchmark status</p><strong id="side-pass-rate">70%</strong>
+          <span id="side-pass-copy">14 of 20 cases passed</span><div class="progress-track"><span id="side-progress"></span></div>
+        </section>
+        <div class="sidebar-footer"><span class="status-dot"></span>Demo artifacts loaded</div>
+      </aside>
+      <section class="main-pane">
+        <header class="topbar">
+          <div><p class="eyebrow">Customer support copilot</p><h1>How can we help today?</h1></div>
+          <div class="topbar-actions"><button class="icon-button" type="button" id="theme-button" aria-label="Toggle contrast">◐</button><div class="avatar">NDK</div></div>
+        </header>
+        <section class="assistant-view">
+          <div class="welcome" id="welcome-state">
+            <div class="welcome-orbit">✦</div><h2>Ask OrbitTech Support</h2>
+            <p>This demo displays real answers and retrieval traces saved from the OrbitTech benchmark. Pick a question to inspect the full evaluation trail.</p>
+          </div>
+          <div class="conversation" id="conversation" hidden>
+            <article class="message message--user"><div class="message-avatar">You</div><div><p class="message-label">Benchmark question <span id="case-id"></span></p><p id="question-text"></p></div></article>
+            <article class="message message--assistant"><div class="message-avatar message-avatar--bot">O</div><div class="answer-block"><p class="message-label">OrbitTech Support</p><p id="answer-text"></p><button class="evidence-toggle" type="button" id="evidence-toggle"><span>⌘</span> View retrieved evidence</button></div></article>
+            <section class="evidence-list" id="evidence-list" hidden></section>
+          </div>
+        </section>
+        <section class="suggestions">
+          <div class="section-heading"><div><p class="eyebrow">Try a saved test case</p><h2>Suggested questions</h2></div><button class="text-button" id="shuffle-button" type="button">Refresh ↻</button></div>
+          <div class="suggestion-grid" id="suggestion-grid"></div>
+        </section>
+        <form class="composer" id="composer"><span class="composer-icon">⌕</span><input id="question-input" autocomplete="off" placeholder="Search benchmark questions…" /><button type="submit">Find case</button></form>
+      </section>
+      <aside class="inspector" id="inspector">
+        <div class="inspector-header"><div><p class="eyebrow">Evaluation trace</p><h2>Case signals</h2></div><span class="case-pill" id="case-pill">—</span></div>
+        <div class="overall-card"><div><span>Overall score</span><strong id="overall-score">—</strong></div><span class="result-badge" id="pass-badge">Select a case</span></div>
+        <div class="metric-list" id="metric-list"><p class="empty-inspector">Choose a question to inspect five metrics and evidence quality.</p></div>
+        <section class="inspector-section"><div class="inspector-section-title"><span>Failure label</span><span id="failure-type">—</span></div><p id="failure-hint">No case selected.</p></section>
+        <section class="inspector-section inspector-section--note"><p class="eyebrow">Interpretation</p><p>Retrieval scores diagnose evidence selection. The Overall score averages answer quality only.</p></section>
+      </aside>
+    </main>
+    <template id="metric-template"><div class="metric-row"><div class="metric-copy"><span class="metric-name"></span><strong class="metric-value"></strong></div><div class="metric-track"><span></span></div></div></template>
+    <script src="app.js"></script>
+  </body>
+</html>

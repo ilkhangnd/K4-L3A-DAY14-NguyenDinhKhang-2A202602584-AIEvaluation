@@ -5,3 +5,8 @@ __pycache__/
 .venv/
 .env
 .DS_Store
+
+# Local presentation build and validation files
+.chart-data-*/
+.codex-build-demo/
+.codex-finalizer/
